@@ -5,7 +5,6 @@ function computerPlay() {
 
 function playRound(playerSelection, computerSelection) {
     let result = decideWinner(playerSelection, computerSelection);
-    console.log(result);
     return showResult(result, playerSelection, computerSelection);
 }
 
@@ -74,6 +73,15 @@ function showResult(result, playerSelection, computerSelection) {
 
 }
 
+function updateCounters(roundResult) {
+    roundsPlayedDiv.textContent = `Number of rounds played: ${roundsPlayed}`;
+    roundScoreDiv.textContent = `Player ${playerWinCount} : ${computerWinCount} Computer`;
+}
+
+function stopGame() {
+    finalOutcome.textContent = `Game finished! Final game score is ${playerWinCount} : ${computerWinCount}`
+
+}
 let roundsPlayed = 0;
 let playerWinCount = 0;
 let computerWinCount = 0;
@@ -90,6 +98,10 @@ buttons.forEach((button) => {
         let computerSelection = computerPlay();
         let roundResult = playRound(playerSelection, computerSelection);
         roundsPlayed++;
+        updateCounters(roundResult);
+        if (playerWinCount == 5 || computerWinCount == 5) {
+            stopGame();
+        }
     })
 })
 
