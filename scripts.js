@@ -9,6 +9,75 @@ function playRound(playerSelection, computerSelection) {
     return showResult(result, playerSelection, computerSelection);
 }
 
+function decideWinner(playerSelection, computerSelection) {
+    let tie;
+    let win;
+    let lose;
+    if (playerSelection == "Rock") {
+        if (computerSelection == "Rock") {
+            tie = true;
+        }
+        if (computerSelection == "Paper") {
+            lose = true;
+        }
+        if (computerSelection == "Scissors") {
+            win = true;
+        }
+    }
+    
+    if (playerSelection == "Paper") {
+        if (computerSelection == "Rock") {
+            win = true;
+        }
+        if (computerSelection == "Paper") {
+            tie = true;
+        }
+        if (computerSelection == "Scissors") {
+            lose = true;
+        }
+    }
+    
+    if (playerSelection == "Scissors") {
+        if (computerSelection == "Rock") {
+            lose = true;
+        }
+        if (computerSelection == "Paper") {
+            win = true;
+        }
+        if (computerSelection == "Scissors") {
+            tie = true;
+        }
+    }
+
+    if (tie) {
+        return "tie";
+    }
+    else if (win) {
+        playerWinCount++;
+        return "win";
+    }
+    else {
+        computerWinCount++;
+        return "lose";
+    }
+}
+
+function showResult(result, playerSelection, computerSelection) {
+    if (result == "tie") {
+        return roundOutcomeDiv.textContent = "Tie";
+    } else if (result == "win") {
+        return roundOutcomeDiv.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
+    }
+    else {
+        return roundOutcomeDiv.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`
+    }
+
+}
+
+let roundsPlayed = 0;
+let playerWinCount = 0;
+let computerWinCount = 0;
+
 let roundsPlayedDiv = document.querySelector(".round-count");
 let roundScoreDiv = document.querySelector(".round-score");
 let roundOutcomeDiv = document.querySelector(".round-outcome");
